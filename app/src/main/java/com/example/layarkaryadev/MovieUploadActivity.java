@@ -16,7 +16,6 @@ import android.provider.OpenableColumns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -45,7 +44,7 @@ public class MovieUploadActivity extends AppCompatActivity implements AdapterVie
     public TextView toolbarTitle;
     public ImageView toolbarBtn;
     public Uri movieUri;
-    public TextView txtFileSelected;
+    public EditText txtFileSelected;
     public String movieCategory;
     public String movieTitle;
     public String currentId;
@@ -189,7 +188,7 @@ public class MovieUploadActivity extends AppCompatActivity implements AdapterVie
                         public void onSuccess(Uri uri) {
                             String movie_url = uri.toString();
 
-                            MovieUploadDetails movieUploadDetails = new MovieUploadDetails("", "", "", movie_url, movieTitle,
+                            MovieUploadDetails movieUploadDetails = new MovieUploadDetails("", "", "", movie_url, txtFileSelected.getText().toString(),
                                     movieDescription.getText().toString(), movieCategory);
                             String uploadId = dbReference.push().getKey();
                             dbReference.child(uploadId).setValue(movieUploadDetails);
