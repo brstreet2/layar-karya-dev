@@ -39,7 +39,6 @@
             android:layout_height="100dp"
             android:src="@drawable/ic_baseline_upload_file_24"
             app:tint="@color/white"
-            android:onClick="openFiles"
             android:layout_gravity="center" />
 
         <EditText
