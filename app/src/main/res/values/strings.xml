@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Layar Karya Dev</string>
     <string name="uploadMovie">Upload Form</string>
+    <string name="uploadThumbnail">Upload Thumbnail</string>
 </resources>

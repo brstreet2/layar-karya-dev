@@ -3,6 +3,7 @@ package com.example.layarkaryadev;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -53,6 +54,8 @@ public class MovieUploadActivity extends AppCompatActivity implements AdapterVie
     public DatabaseReference dbReference;
     public EditText movieDescription;
     public FirebaseAuth mAuth;
+    public ImageView btnBrowse;
+    public CardView btnUpload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,8 @@ public class MovieUploadActivity extends AppCompatActivity implements AdapterVie
         dbReference = FirebaseDatabase.getInstance("https://layarkarya-65957-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("movies");
         mStorageRef = FirebaseStorage.getInstance().getReference().child("movies");
         mAuth = FirebaseAuth.getInstance();
+        btnBrowse = findViewById(R.id.btnBrowse);
+        btnUpload = findViewById(R.id.btnUpload);
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
         List<String> categories = new ArrayList<>();
@@ -73,7 +78,7 @@ public class MovieUploadActivity extends AppCompatActivity implements AdapterVie
         categories.add("Adventure");
         categories.add("Comedy");
         categories.add("Romance");
-        categories.add("Sports");
+        categories.add("Horror");
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -83,6 +88,20 @@ public class MovieUploadActivity extends AppCompatActivity implements AdapterVie
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        btnBrowse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openFiles(view);
+            }
+        });
+
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseUpload(view);
             }
         });
 
@@ -116,7 +135,7 @@ public class MovieUploadActivity extends AppCompatActivity implements AdapterVie
     }
 
     @SuppressLint("Range")
-    String getFilename(Uri uri, Context context) {
+    private String getFilename(Uri uri, Context context) {
         String res = null;
         if (uri.getScheme().equals("content")) {
             Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
@@ -194,6 +213,9 @@ public class MovieUploadActivity extends AppCompatActivity implements AdapterVie
                             dbReference.child(uploadId).setValue(movieUploadDetails);
                             currentId = uploadId;
                             progressDialog.dismiss();
+                            if(currentId.equals(uploadId)){
+                                startThumbnailActivity();
+                            }
                         }
                     });
                 }
@@ -207,6 +229,14 @@ public class MovieUploadActivity extends AppCompatActivity implements AdapterVie
         } else {
             Toast.makeText(this, "No File Selected", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void startThumbnailActivity() {
+        Intent intent = new Intent(MovieUploadActivity.this, ThumbnailUploadActivity.class);
+        intent.putExtra("currentId", currentId);
+        intent.putExtra("thumbnailsName", movieTitle);
+        startActivity(intent);
+        Toast.makeText(this, "Movie has been successfully uploaded, Please upload movie's thumbnail!", Toast.LENGTH_LONG).show();
     }
 }
 
