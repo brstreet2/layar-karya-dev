@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="16dp"
             android:gravity="center_horizontal"
-            android:text="DEVELOPER PANEL"
+            android:text="CONTENT CREATOR PORTAL"
             android:textColor="@color/lk_vision"
             android:textSize="20sp"
             android:textStyle="bold" />
