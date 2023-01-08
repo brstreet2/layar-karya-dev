@@ -206,9 +206,9 @@ public class MovieUploadActivity extends AppCompatActivity implements AdapterVie
                         @Override
                         public void onSuccess(Uri uri) {
                             String movie_url = uri.toString();
-
+                            String uploaderId = mAuth.getCurrentUser().getUid();
                             MovieUploadDetails movieUploadDetails = new MovieUploadDetails("", "", "", movie_url, txtFileSelected.getText().toString(),
-                                    movieDescription.getText().toString(), movieCategory);
+                                    movieDescription.getText().toString(), movieCategory, uploaderId);
                             String uploadId = dbReference.push().getKey();
                             dbReference.child(uploadId).setValue(movieUploadDetails);
                             currentId = uploadId;

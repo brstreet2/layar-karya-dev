@@ -185,6 +185,7 @@ public class ThumbnailUploadActivity extends AppCompatActivity {
                             updateDb.child("movie_thumbnail").setValue(thumbnailUrl);
                             progressDialog.dismiss();
                             Toast.makeText(ThumbnailUploadActivity.this, "Thumbnail Uploaded", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(ThumbnailUploadActivity.this, MainActivity.class));
                         }
                     });
                 }

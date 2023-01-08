@@ -1,11 +1,18 @@
 package com.example.layarkaryadev.Model;
 
 public class MovieUploadDetails {
-    String movie_slide, movie_type, movie_thumbnail, movie_url, movie_name, movie_description, movie_category;
+    public String movie_slide;
+    public String movie_type;
+    public String movie_thumbnail;
+    public String movie_url;
+    public String movie_name;
+    public String movie_description;
+    public String movie_category;
+    public String uploader_id;
 
     public MovieUploadDetails(String movie_slide, String movie_type, String movie_thumbnail,
                               String movie_url, String movie_name, String movie_description,
-                              String movie_category) {
+                              String movie_category, String uploader_id) {
         this.movie_slide = movie_slide;
         this.movie_type = movie_type;
         this.movie_thumbnail = movie_thumbnail;
@@ -13,6 +20,7 @@ public class MovieUploadDetails {
         this.movie_name = movie_name;
         this.movie_description = movie_description;
         this.movie_category = movie_category;
+        this.uploader_id = uploader_id;
     }
 
     public MovieUploadDetails() {
@@ -72,5 +80,13 @@ public class MovieUploadDetails {
 
     public void setMovie_category(String movie_category) {
         this.movie_category = movie_category;
+    }
+
+    public String getUploader_id() {
+        return uploader_id;
+    }
+
+    public void setUploader_id(String uploader_id) {
+        this.uploader_id = uploader_id;
     }
 }
