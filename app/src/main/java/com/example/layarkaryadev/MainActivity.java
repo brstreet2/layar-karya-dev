@@ -80,6 +80,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new UploadMovieFragment()).commit();
                 break;
 
+            case R.id.nav_market:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MarketFragment()).commit();
+                break;
+
             case R.id.nav_logout:
                 mAuth.signOut();
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
