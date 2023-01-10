@@ -30,8 +30,11 @@ import android.widget.Toast;
 import com.example.layarkaryadev.Model.MovieUploadDetails;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -62,6 +65,9 @@ public class UploadMovieFragment extends Fragment implements AdapterView.OnItemS
     public ImageView btnBrowse;
     public CardView btnUpload;
     public View uploadMovieView;
+    private DatabaseReference databaseReference;
+    private int contentCount;
+    public static int count;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -268,6 +274,36 @@ public class UploadMovieFragment extends Fragment implements AdapterView.OnItemS
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.replace(R.id.fragment_container, thumbnailUpload);
         fragmentTransaction.commit();
+        addContentCount();
         Toast.makeText(getContext(), "Movie has been successfully uploaded, Please upload movie's thumbnail!", Toast.LENGTH_LONG).show();
+    }
+
+    private void addContentCount() {
+        databaseReference = FirebaseDatabase.getInstance("https://layarkarya-65957-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("users")
+                .child(mAuth.getUid());
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                contentCount = dataSnapshot.child("contentCount").getValue(int.class);
+                count = contentCount + 1;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dataSnapshot.getRef().child("contentCount").setValue(count);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
