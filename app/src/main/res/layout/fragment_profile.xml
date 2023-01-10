@@ -21,12 +21,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:orientation="vertical">
-                <ImageView
-                    android:layout_marginTop="45dp"
-                    android:layout_gravity="center_horizontal"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/userAva"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="45dp"
+                    android:src="@drawable/ic_baseline_account_circle_24"
+                    app:shapeAppearanceOverlay="@style/roundedImageViewRounded"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/uploadPictureText"
+                    android:layout_width="34dp"
+                    android:layout_height="24dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Upload"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textSize="8sp"
+                        android:textColor="@color/blue_lk_logo"
+                        android:background="@color/white"/>
+
+                </androidx.cardview.widget.CardView>
+
                 <TextView
                     android:id="@+id/displayName"
                     android:layout_marginTop="10dp"
@@ -42,7 +66,8 @@
                 android:layout_width="400dp"
                 android:layout_height="120dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="275dp">
+                android:layout_marginTop="275dp"
+                app:cardBackgroundColor="@color/white">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -58,9 +83,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Content"
-                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
                             />
                         <TextView
+                            android:id="@+id/contentCountDisplay"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="125"
@@ -80,11 +107,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Coin"
-                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
                             />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/coinWealth"
                             android:text="1205"
                             android:textStyle="bold"
                             android:textSize="20sp"
@@ -101,10 +130,12 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Following"
-                            android:textSize="20sp"
+                            android:text="Movie Watched"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
                             />
                         <TextView
+                            android:id="@+id/movieWatchDisplay"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="360"
@@ -137,6 +168,7 @@
                     app:tint="@color/white"
                     android:src="@drawable/ic_baseline_email_24"/>
                 <TextView
+                    android:id="@+id/displayEmail"
                     android:textStyle="bold"
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
@@ -157,6 +189,7 @@
                     app:tint="@color/white"
                     android:src="@drawable/ic_baseline_phone"/>
                 <TextView
+                    android:id="@+id/phoneDisplay"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:layout_gravity="center_vertical"
@@ -177,6 +210,7 @@
                     app:tint="@color/white"
                     android:src="@drawable/ic_baseline_location_on_24"/>
                 <TextView
+                    android:id="@+id/locationDisplay"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:layout_gravity="center_vertical"
@@ -185,26 +219,7 @@
                     android:paddingLeft="20dp"
                     android:text="Location"/>
             </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="25dp"
-                android:orientation="horizontal"
-                android:paddingLeft="25dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    app:tint="@color/white"
-                    android:src="@drawable/ic_baseline_arrow_back_24"/>
-                <TextView
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="20dp"
-                    android:text="Show all comments"/>
-            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
