@@ -1,6 +1,8 @@
 package com.example.layarkaryadev.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.layarkaryadev.Model.ProductModel;
@@ -55,6 +58,22 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
             }
         });
 
+        holder.buyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(context)
+                        .setTitle("Purchase Confirmation")
+                        .setMessage("Purchase this item for " + String.valueOf(product.get(position).getProduct_price()) + " coin?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        }).setNegativeButton("No", null)
+                        .show();
+            }
+        });
+
     }
 
     @Override
@@ -68,6 +87,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
         private TextView productPrice;
         private ImageView imgMedia;
         private ProgressBar progressBar;
+        private CardView buyBtn;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,6 +96,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
             productPrice = (TextView) itemView.findViewById(R.id.productPrice);
             imgMedia = (ImageView) itemView.findViewById(R.id.productImg);
             progressBar = (ProgressBar) itemView.findViewById(R.id.progress_bar);
+            buyBtn = (CardView) itemView.findViewById(R.id.btnBuy);
         }
     }
 }

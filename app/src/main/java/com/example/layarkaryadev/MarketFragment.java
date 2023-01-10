@@ -100,8 +100,8 @@ public class MarketFragment extends Fragment {
         });
 
         marketAdapter = new MarketAdapter(getContext(), productModel);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        rvProducts.setLayoutManager(layoutManager);
+        rvProducts.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvProducts.hasFixedSize();
         rvProducts.setAdapter(marketAdapter);
 //        showProduct();
         return marketView;
