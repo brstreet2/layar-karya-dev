@@ -103,11 +103,6 @@ public class MarketFragment extends Fragment {
         rvProducts.setLayoutManager(new LinearLayoutManager(getContext()));
         rvProducts.hasFixedSize();
         rvProducts.setAdapter(marketAdapter);
-//        showProduct();
         return marketView;
-    }
-
-    private void showProduct() {
-
     }
 }
