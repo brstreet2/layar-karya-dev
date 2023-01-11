@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            android:background="@drawable/gradient_color_blue_main">
 
             <LinearLayout
                 android:id="@+id/img_next"
@@ -72,8 +73,9 @@
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
                             android:maxLines="2"
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textColor="@color/white"
+                            android:textSize="24sp"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:id="@+id/movieDescription"
@@ -81,7 +83,7 @@
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
                             android:maxLines="2"
-                            android:textColor="#BCBCBC"
+                            android:textColor="#EDEBEB"
                             android:textSize="16sp" />
 
                     </LinearLayout>
