@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public Button btnFormUpload;
     public FirebaseAuth mAuth;
     private DrawerLayout drawerLayout;
+    public static Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        btnLogOut = findViewById(R.id.btnLogout);
 //        btnFormUpload = findViewById(R.id.btnFormUpload);
         mAuth = FirebaseAuth.getInstance();
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -70,18 +71,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.nav_discover:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainFragment()).commit();
+                toolbar.setTitle(getString(R.string.my_content));
                 break;
 
             case R.id.nav_account:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+                toolbar.setTitle(getString(R.string.my_profile));
                 break;
 
             case R.id.nav_upload:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new UploadMovieFragment()).commit();
+                toolbar.setTitle(getString(R.string.uploadMovie));
                 break;
 
             case R.id.nav_market:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MarketFragment()).commit();
+                toolbar.setTitle(getString(R.string.marketplace));
                 break;
 
             case R.id.nav_logout:
