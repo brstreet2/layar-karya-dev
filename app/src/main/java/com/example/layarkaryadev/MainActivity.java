@@ -7,6 +7,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -90,8 +92,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_logout:
-                mAuth.signOut();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Sign Out Confirmation")
+                        .setMessage("Proceed to Sign Out?")
+                        .setIcon(R.drawable.ic_baseline_arrow_back_24)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                mAuth.signOut();
+                                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
