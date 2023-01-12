@@ -85,29 +85,29 @@ public class MainFragment extends Fragment {
         mainView = inflater.inflate(R.layout.fragment_main, container, false);
         rvMovie = (RecyclerView) mainView.findViewById(R.id.rvMovie);
         mAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance("https://layarkarya-65957-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("movies");
-        movieUploadDetails = new ArrayList<>();
-        databaseReference.getRef().orderByChild("uploader_id").equalTo(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    MovieUploadDetails movie = dataSnapshot.getValue(MovieUploadDetails.class);
-                    movieUploadDetails.add(movie);
+        if (mAuth.getCurrentUser() != null) {
+            databaseReference = FirebaseDatabase.getInstance("https://layarkarya-65957-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("movies");
+            movieUploadDetails = new ArrayList<>();
+            databaseReference.getRef().orderByChild("uploader_id").equalTo(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        MovieUploadDetails movie = dataSnapshot.getValue(MovieUploadDetails.class);
+                        movieUploadDetails.add(movie);
+                    }
+                    movieAdapter.notifyDataSetChanged();
                 }
-                movieAdapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-
-        movieAdapter = new MovieAdapter(getContext(), movieUploadDetails);
-        rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvMovie.hasFixedSize();
-        rvMovie.setAdapter(movieAdapter);
-
+                }
+            });
+            movieAdapter = new MovieAdapter(getContext(), movieUploadDetails);
+            rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));
+            rvMovie.hasFixedSize();
+            rvMovie.setAdapter(movieAdapter);
+        }
         return mainView;
     }
 }
